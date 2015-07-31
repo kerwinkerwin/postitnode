@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div
+    h1.
+      Create Notes
+    div
+      form#formCreateNote(name="createNote",method="post",action="/note/new")
+          input#inputTitle(type="text", placeholder="title", name="title")
+          input#inputContent(type="text", placeholder="content", name="content")
+          button#btnSubmit(type="submit") Add Note
