@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 
+
 /* GET Create note route */
 router.get('/note/new',function(req,res,next){
   res.render('create');
@@ -24,20 +25,41 @@ router.post('/note/new', function(req,res,next){
   });
 });
 
-/*Update note */
+/*Get Update note */
 router.get('/note/:id', function(req,res,next){
   var db = req.db;
-  var idToUser = req.params.id
+  var idToUse = req.params.id
   var collection = db.get('notescollection');
-  collection.findOne({
-    "_id": idToUser
-  },function(err,doc){
+  collection.findOne(
+    {_id:idToUse
+    },function(err,doc){
     if(err){
       res.error("Unavailable to find");
     }else{
       res.render('note',{
         "note":doc
       });
+    };
+  });
+});
+
+/*Put update note */
+router.put('/note/:id', function(req,res,next){
+  console.log("hitting this?");
+  var db = req.db;
+  var idToUser = req.params.id
+  var title = req.body.title
+  var content = req.body.content
+  var collection = db.get('notescollection');
+  collection.update(
+    {"_id": idToUser},
+    {"title": title,
+     "content":content
+  },function(err,doc){
+    if(err){
+      res.error("Unavailable to find");
+    }else{
+      res.redirect('/');
     };
   });
 });

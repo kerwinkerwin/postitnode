@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  h1.
-    #{note.title}
-  p.
-    #{note.content}
+  h1 Update Note
+    form#formDeleteNote(name="note",method="post",action="/note/#{note._id}?_method=PUT")
+      input#inputTitle(type="text", placeholder="#{note.title}", name="title")
+      input#inputTitle(type="text", placeholder="#{note.content}", name="content")
+      button#btnSubmit(type="submit") Update Note
+
+          
+    

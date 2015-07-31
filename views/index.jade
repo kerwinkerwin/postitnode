@@ -4,12 +4,14 @@ block content
   h1.
     Notes
   ul
-    each note, i in notes
-      div(class="note")
-        h3 #{note.title}
-        p #{note.content}
-        form#formDeleteNote(name="note",method="post",action="/note/#{note._id}")
-            button#btnSubmit(type="submit") Delete
-        form#formDeleteNote(name="note",method="get",action="/note/#{note._id}")
-            button#btnSubmit(type="submit") Update
+    if notes
+      each note, i in notes
+        div(class="note")
+          h3 #{note.title}
+          p #{note.content}
+          form#formDeleteNote(name="note",method="post",action="/note/#{note._id}")
+              button#btnSubmit(type="submit") Delete
+          form#formDeleteNote(name="note",method="get",action="/note/#{note._id}")
+              button#btnSubmit(type="submit") Update
+    
   a(href="/note/new") Add Note
